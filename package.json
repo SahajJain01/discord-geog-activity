@@ -1,0 +1,16 @@
+{
+  "name": "discord-geog-activity",
+  "version": "0.1.0",
+  "description": "Discord custom activity for daily GeoGuessr challenges",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "bot": "node bot.js",
+    "test": "node --check server.js && node --check public/activity.js && node --check bot.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "discord.js": "^14.15.3"
+  }
+}
