@@ -6,9 +6,11 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "test": "node --check server.js && node --check public/activity.js"
+    "bot": "node bot.js",
+    "test": "node --check server.js && node --check public/activity.js && node --check bot.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "discord.js": "^14.15.3"
   }
 }

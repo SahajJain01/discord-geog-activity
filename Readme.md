@@ -14,10 +14,18 @@ This project provides a custom Discord Activity where server members can play a 
    npm install
    ```
 3. Set the client ID in `public/activity.js` by replacing `YOUR_CLIENT_ID`.
-4. Start the activity server:
+4. Create a bot token for the same application and note its ID.
+5. Provide the following environment variables when running the bot:
+   - `DISCORD_TOKEN`: bot token
+   - `APP_ID`: application ID
+   - `ACTIVITY_ID`: application ID of the embedded activity (same as `APP_ID`)
+   - `API_BASE` (optional): URL of the activity server (`http://localhost:3000` by default)
+6. Start the activity server and bot in separate terminals:
    ```bash
-   npm start
+   npm start        # serves the embedded activity
+   npm run bot      # registers slash commands and handles interactions
    ```
-5. Use the Discord developer tools to launch the custom activity in any voice or text channel pointing to your server's URL.
+7. In Discord, use `/geoguessr start` in a channel to create an invite for the activity.
+8. Use `/geoguessr leaderboard` to show scores for the current channel.
 
 Scores are stored in `scores.json` which is ignored by git so player data isn't committed.
