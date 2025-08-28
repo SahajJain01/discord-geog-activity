@@ -1,0 +1,64 @@
+// Prisma schema for GeoGuessr Daily Discord bot
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model GuildConfig {
+  id               String   @id @default(cuid())
+  guildId          String   @unique
+  dailyChannelId   String
+  dailyHourLocal   Int      @default(8)
+  tz               String   @default("Asia/Ho_Chi_Minh")
+  minSubsForStreak Int      @default(1)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Challenge {
+  id        String   @id @default(cuid())
+  dateKey   String   @unique
+  url       String
+  index     Int
+  createdAt DateTime @default(now())
+}
+
+model DailyGame {
+  id           String   @id @default(cuid())
+  guildId      String
+  channelId    String
+  dateKey      String
+  challengeId  String
+  messageId    String
+  postedAt     DateTime @default(now())
+  summaryMsgId String?
+
+  @@unique([guildId, dateKey])
+}
+
+model Submission {
+  id          String   @id @default(cuid())
+  guildId     String
+  dateKey     String
+  userId      String
+  username    String
+  score       Int?
+  rawText     String?
+  imageUrl    String?
+  submittedAt DateTime @default(now())
+
+  @@unique([guildId, dateKey, userId])
+}
+
+model GroupStreak {
+  id       String  @id @default(cuid())
+  guildId  String  @unique
+  current  Int     @default(0)
+  best     Int     @default(0)
+  lastDate String?
+}
